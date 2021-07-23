@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{{ application_name }}
+{% endblock %}
+
+{% block body %}
+{# {% include 'layouts/nav.html.twig' %} #}
+
+{{ dump (videos ) }}
+<div class="container">
+    <div class="row text-center mt-5">
+        {% if videos | length <= 0 %}
+
+        <h2>No records found !</h2>
+        <p class="text-lead">
+            Be the first, <a href="#add-video">add new video</a>
+        </p>
+
+        {% else %}
+        {% for video in videos%}
+        <h3> {{ video.title }} - {{ video.url }} </h3>
+        {% endfor %}
+        {% endif %}
+
+        <hr>
+        <section id="#add-video" class="row mt-5">
+            <div>
+                <div class="col-6 mx-auto">
+                    <h2 class="text-lead">Add new video</h2>
+                    {{ form_start(form, {'attr': {'formnovalidate': 'formnovalidate'}}
+                    ) }}
+                    {{ form_rest(form) }}
+                    <button type="submit" class="btn btn-primary btn-block">Add</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+        </section>
+
+
+        {% include 'layouts/footer.html.twig'%}
+        {% endblock %}
